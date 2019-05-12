@@ -1,0 +1,4 @@
+include ':app', ':Sync'
+
+include ':Sync'
+project(':Sync').projectDir = new File(settingsDir, '../Sync')
