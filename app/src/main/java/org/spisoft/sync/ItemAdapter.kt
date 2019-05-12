@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.spisoft.sync.account.DBAccountHelper
+import com.spisoft.sync.database.SyncedFolderDBHelper
 
 
 import org.spisoft.sync.ItemFragment.OnListFragmentInteractionListener
@@ -24,7 +26,7 @@ class ItemAdapter(
 ) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
-    private val mValues:List<Object>? = null
+    private var mItems:List<Any>? = null
 
     init {
         mOnClickListener = View.OnClickListener { v ->
@@ -42,9 +44,22 @@ class ItemAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = mValues!![position]
-        holder.mIdView.text = item.id
-        holder.mContentView.text = item.content
+        val item = mItems!![position]
+        if(item is DBAccountHelper.Account){
+            holder.mIdView.text = item.friendlyName
+            holder.mContentView.visibility = View.GONE
+        }
+        else if(item is SyncedFolderDBHelper.SyncItem){
+            holder.mIdView.text = item.path
+            holder.mContentView.visibility = View.VISIBLE
+            holder.mContentView.setText(when{
+                    item.way == 0 -> R.string.sync_both;
+                    item.way == 1 -> R.string.from_local_to_remote
+                    else -> R.string.from_remote_to_local
+                }
+            )
+        }
+
 
         with(holder.mView) {
             tag = item
@@ -52,7 +67,11 @@ class ItemAdapter(
         }
     }
 
-    override fun getItemCount(): Int = mValues.size
+    public fun setItems(items:List<Any>){
+        mItems = items;
+    }
+
+    override fun getItemCount(): Int = mItems!!.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val mIdView: TextView = mView.item_number

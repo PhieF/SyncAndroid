@@ -27,14 +27,14 @@ class ItemFragment : Fragment() {
 
     // TODO: Customize parameters
     private var columnCount = 1
-
+    private var mAdapter:ItemAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_item_list, container, false)
-
+        mAdapter = ItemAdapter(activity!!, mOnListFragmentInteractionListener);
         // Set the adapter
         if (view is RecyclerView) {
             with(view) {
@@ -42,7 +42,7 @@ class ItemFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = ItemAdapter( context, mOnListFragmentInteractionListener)
+                adapter = mAdapter
             }
         }
         return view
@@ -53,9 +53,9 @@ class ItemFragment : Fragment() {
         val accounts = DBAccountHelper.getInstance(context).accounts
 
         if (accounts.size == 0) {
-            mEmptyView?.setVisibility(View.VISIBLE)
+            //mEmptyView?.setVisibility(View.VISIBLE)
         } else {
-            mEmptyView?.setVisibility(View.GONE)
+            //mEmptyView?.setVisibility(View.GONE)
             for(account in accounts){
                 items.add(account)
                 for(item in SyncedFolderDBHelper.getInstance(context).getSyncedItems(account.accountID)){
@@ -63,8 +63,7 @@ class ItemFragment : Fragment() {
                 }
             }
 
-            mAdapter = AccountAdapter(context, cursor, 0)
-            mListView?.setAdapter(mAdapter)
+            mAdapter!!.setItems(items)
 
         }
     }
