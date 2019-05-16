@@ -84,8 +84,14 @@ class ItemFragment : Fragment() {
 
     val mOnListFragmentInteractionListener = object :OnListFragmentInteractionListener{
         override fun onListFragmentInteraction(item: Object?) {
+            if(item is DBAccountHelper.Account){
+                startActivity(Intent(context, AccountConfigActivity::class.java))
+            } else if(item is SyncedFolderDBHelper.SyncItem){
+                startActivity(Intent(context, SyncFolderSettingActivity::class.java))
 
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+            else ;
+                //add account
         }
 
     }

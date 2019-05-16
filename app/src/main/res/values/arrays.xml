@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ways_values">
+        <item>both</item>
+        <item>local_to_remote</item>
+        <item>remote_to_local</item>
+    </string-array>
+
+    <string-array name="ways_entries">
+        <item>@string/sync_both</item>
+        <item>@string/from_local_to_remote</item>
+        <item>@string/from_remote_to_local</item>
+    </string-array>
+    <string-array name="freq_entries">
+        <item>@string/fifteen_minutes</item>
+        <item>@string/thirty_minutes</item>
+        <item>@string/one_hour</item>
+        <item>@string/two_hours</item>
+        <item>@string/three_hours</item>
+        <item>@string/six_hours</item>
+        <item>@string/twelve_hours</item>
+        <item>@string/twenty_four_hours</item>
+        <item>@string/once_a_week</item>
+    </string-array>
+    <string-array name="freq_values">
+        <item>900000</item>
+        <item>1800000</item>
+        <item>3600000</item>
+        <item>7200000</item>
+        <item>10800000</item>
+        <item>21600000</item>
+        <item>43200000</item>
+        <item>86400000</item>
+        <item>604800000</item>
+    </string-array>
+</resources>
