@@ -1,21 +1,18 @@
 package org.spisoft.sync
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.spisoft.sync.account.AccountAdapter
 import com.spisoft.sync.account.DBAccountHelper
 import com.spisoft.sync.database.SyncedFolderDBHelper
 
-import org.spisoft.sync.dummy.DummyContent
-import org.spisoft.sync.dummy.DummyContent.DummyItem
-import java.util.*
 import kotlin.collections.ArrayList
 
 /**
@@ -77,17 +74,7 @@ class ItemFragment : Fragment() {
         super.onDetach()
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson
-     * [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
+
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onListFragmentInteraction(item: Object?)
